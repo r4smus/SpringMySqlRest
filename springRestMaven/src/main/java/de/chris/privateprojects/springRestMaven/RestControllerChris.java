@@ -27,6 +27,12 @@ public class RestControllerChris {
     		return personDao.findOne(id);	
     }
     
+	@RequestMapping("/personList")
+	public Iterable<Person> getPersonList() {
+		return personDao.findAll();
+	}
+    
+    
 	@RequestMapping("/create")
 	public String create(String firstName, String lastName) {
 		String id = "";
