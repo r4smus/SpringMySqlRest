@@ -1,5 +1,6 @@
 package de.chris.privateprojects.springRestMaven;
 
+import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,10 @@ public class RestControllerChris {
     
     
 	@RequestMapping("/create")
-	public String create(String firstName, String lastName) {
+	public String create(String firstName, String lastName, Date birthday) {
 		String id = "";
 		try {
-			Person person = new Person(firstName, lastName);
+			Person person = new Person(firstName, lastName, birthday);
 			personDao.save(person);
 			id = String.valueOf(person.getId());
 		} catch (Exception ex) {

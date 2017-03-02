@@ -1,5 +1,7 @@
 package de.chris.privateprojects.springRestMaven;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +21,17 @@ public class Person {
 	@NotNull
 	private String lastName;
 	
+	@NotNull
+	private Date birthday;
+	
 	
 	public Person(){
 		
 	}
-	public Person(String firstName, String lastName){
+	public Person(String firstName, String lastName, Date birthday){
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.birthday = birthday;
 	}
 	
 	public int getId() {
@@ -46,7 +52,11 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
 }
