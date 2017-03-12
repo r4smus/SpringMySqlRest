@@ -13,6 +13,9 @@ public class RestControllerChris {
 
 	@Autowired
 	private PersonDao personDao;
+	
+	@Autowired
+	private HeroDao heroDao;
     
     @RequestMapping("/person")
     public Person getPerson(@RequestParam(value="id") Integer id){
@@ -25,8 +28,8 @@ public class RestControllerChris {
 	}
     
     
-	@RequestMapping("/create")
-	public String create(String firstName, String lastName, Date birthday) {
+	@RequestMapping("/createPerson")
+	public String createPerson(String firstName, String lastName, Date birthday) {
 		String id = "";
 		try {
 			Person person = new Person(firstName, lastName, birthday);
@@ -38,7 +41,7 @@ public class RestControllerChris {
 		return "Person succesfully created with id = " + id;
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/deletePerson")
 	@ResponseBody
 	public String delete(int id){
 		try {
@@ -50,7 +53,7 @@ public class RestControllerChris {
 		return "Person succesfully deleted!";
 	}
 	
-	@RequestMapping("/update")
+	@RequestMapping("/updatePerson")
 	@ResponseBody
 	public String update(int id, String firstName, String lastName){
 		try {
@@ -62,6 +65,29 @@ public class RestControllerChris {
 			return "Error updating the person: " +ex.toString();
 		}
 		return "Person succesfully updated!";
+	}
+	
+	@RequestMapping("/hero")
+    public Hero getHero(@RequestParam(value="id") Integer id){
+    		return heroDao.findOne(id);	
+    }
+    
+	@RequestMapping("/heroList")
+	public Iterable<Hero> getHeroList() {
+		return heroDao.findAll();
+	}
+	
+	@RequestMapping("/createHero")
+	public String createHero(String name) {
+		String id = "";
+		try {
+			Hero hero = new Hero(name);
+			heroDao.save(hero);
+			id = String.valueOf(hero.getId());
+		} catch (Exception ex) {
+			return "Error creating the hero: " + ex.toString();
+		}
+		return "Hero succesfully created with id = " + id;
 	}
 	
 	
