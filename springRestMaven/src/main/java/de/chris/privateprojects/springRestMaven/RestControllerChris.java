@@ -31,10 +31,10 @@ public class RestControllerChris {
     
     
 	@RequestMapping("/createPerson")
-	public String createPerson(String firstName, String lastName, Date birthday) {
+	public String createPerson(String firstName, String lastName) {
 		String id = "";
 		try {
-			Person person = new Person(firstName, lastName, birthday);
+			Person person = new Person(firstName, lastName, new Date(1985, 3, 11));
 			personDao.save(person);
 			id = String.valueOf(person.getId());
 		} catch (Exception ex) {
