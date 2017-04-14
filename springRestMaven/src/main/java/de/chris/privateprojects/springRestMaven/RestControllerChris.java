@@ -3,8 +3,12 @@ package de.chris.privateprojects.springRestMaven;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +34,7 @@ public class RestControllerChris {
 	}
     
     
-	@RequestMapping("/createPerson")
+	@RequestMapping(value="/createPerson", method = RequestMethod.POST)
 	public String createPerson(String firstName, String lastName) {
 		String id = "";
 		try {
@@ -41,6 +45,14 @@ public class RestControllerChris {
 			return "Error creating the person: " + ex.toString();
 		}
 		return "Person succesfully created with id = " + id;
+	}
+	
+	@RequestMapping(value="/createPerson2")
+	public ResponseEntity<Void> createPerson2(@RequestBody Person person) {
+		person.setBirthday(new Date(1985, 3, 11));
+		personDao.save(person);
+		
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
 	@RequestMapping("/deletePerson")

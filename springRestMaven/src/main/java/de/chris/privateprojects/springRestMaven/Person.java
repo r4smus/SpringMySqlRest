@@ -34,6 +34,11 @@ public class Person {
 		this.birthday = birthday;
 	}
 	
+	public Person(String firstName, String lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
 	public int getId() {
 		return id;
 	}
