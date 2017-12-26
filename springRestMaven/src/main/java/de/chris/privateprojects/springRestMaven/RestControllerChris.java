@@ -34,7 +34,13 @@ public class RestControllerChris {
 	}
     
     
-	@RequestMapping(value="/createPerson", method = RequestMethod.POST)
+	/**
+	 * e.g. http://localhost:8080/createPerson?firstName=Chris&lastName=Kienle
+	 * @param firstName
+	 * @param lastName
+	 * @return
+	 */
+	@RequestMapping(value="/createPerson")
 	public String createPerson(String firstName, String lastName) {
 		String id = "";
 		try {
